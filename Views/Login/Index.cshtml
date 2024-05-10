@@ -1,0 +1,59 @@
+﻿@model LoginModel
+@{
+    ViewData["Title"] = "Estacionei";
+    Layout = "_LayoutSemHeader";
+}
+
+
+
+<div class="container">
+    <div class=" text-center">
+        <h1 class=" display-4"> Estacionei.com</h1>
+        <p>Faça login e encontre sua vaga ideal</p>
+
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <form method="post" action="@Url.Action("Login", "Login")">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome Completo:</label>
+                    <input type="text" class="form-control" id="NomeCompleto" name="NomeCompleto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" id="Senha" name="Senha" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="@Url.Action("Index", "Cadastro")" class="btn btn-secondary">Cadastrar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @TempData["MensagemSucesso"]
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @TempData["MensagemErro"]
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,78 @@
+﻿@model CadastroModel
+@{
+    ViewData["Title"] = "Cadastros";
+    Layout = "_LayoutSemHeader";
+}
+
+<div class="container">
+    <div class=" text-center">
+        <h1 class=" display-4"> Stop Car</h1>
+        <p>Faça seu cadastro na melhor plataforma de estacionamento da região</p>
+
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <form method="post" action="@Url.Action("Criar", "Cadastro")">
+                <div class="form-group">
+                    <label for="NomeCompleto" class="form-label">Nome Completo:</label>
+                    <input type="text" class="form-control" name="NomeCompleto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Telefone" class="form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="Telefone" name="Telefone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="PlacaVeiculo" class="form-label">Placa do Carro:</label>
+                    <input type="text" class="form-control" id="PlavaVeiculo" name="PlacaVeiculo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="TipoVeiculo">Tipo do Veiculo</label>
+                    <select id="TipoVeiculo" name="TipoDoVeiculo" class="form-control">
+                        <option selected>Carro</option>
+                        <option>Moto</option>
+                    </select>
+
+                    <br />
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha:</label>
+                        <input type="password" class="form-control" id="Senha" name="Senha" required>
+                    </div>
+                
+                    <br/>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <a href="@Url.Action("Index", "Login")" class="btn btn-secondary">Voltar</a>
+                       
+                    </div>
+                <div />
+            </form>
+        </div>
+    </div>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @TempData["MensagemSucesso"]
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @TempData["MensagemErro"]
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
