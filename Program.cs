@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProjetoEstacionamentoFaculdade.Models.Contexto;
 using ProjetoEstacionamentoFaculdade.Models.Interface;
@@ -21,6 +22,11 @@ namespace ProjetoEstacionamentoFaculdade
 
             builder.Services.AddScoped<ICadastroRepositorio, CadastroRepositorio>();
             builder.Services.AddScoped<ILoginRepositorio, LoginRepositorio>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie();
+            
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -37,6 +43,7 @@ namespace ProjetoEstacionamentoFaculdade
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",

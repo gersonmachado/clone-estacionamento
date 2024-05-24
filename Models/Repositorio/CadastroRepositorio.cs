@@ -19,6 +19,13 @@ namespace ProjetoEstacionamentoFaculdade.Models.Repositorio
             return await _context.Cadastros.ToListAsync();
         }
 
+        public async Task<CadastroModel> BuscarCadastrosPorNome(string nome)
+        {
+            return await _context.Cadastros
+                .Where(cad => cad.NomeCompleto == nome)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<CadastroModel> CadastrarUsuario(CadastroModel cadastroModel)
         {
             // Remover espaços em branco dos campos antes de salvar

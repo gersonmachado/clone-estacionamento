@@ -1,51 +1,70 @@
-﻿@{
+﻿@model ProjetoEstacionamentoFaculdade.Models.Usuario
+
+@{
     ViewData["Title"] = "Vagas";
     Layout = "_Layout";
 }
 
 <script>
-
-    
-
-    function clicar(element) {
-        @* element.innerHTML = "OK - Reservado [Informar dados do usuário]"; *@
-        element.innerHTML = '<div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading...</span></div> <br/><a>OK - Reservado [Informar dados do usuário]</a> <br/>';
-
-        // Cria um botão de cancelar
-        var cancelButton = document.createElement("button");
-        cancelButton.textContent = "Cancelar";
-        cancelButton.classList.add('btn', 'btn-danger');
-        cancelButton.onclick = function() {
-            cancelarReserva();
+    // Função para pegar os dados do usuário
+    function getUserData() {
+        return {
+            nomeCompleto: '@Model.NomeCompleto',
+            placaVeiculo: '@Model.PlacaVeiculo',
+            tipoDoVeiculo: '@Model.TipoDoVeiculo'
         };
-
-        element.appendChild(cancelButton);      
-    };
-
-    function cancelarReserva() {
-        console.log('Cancelado!')
     }
+
+    // Função que é chamada quando uma vaga é clicada
+    function clicar(element) 
+    {
+        var userData = getUserData();
+
+        // Mostra uma animação de carregamento e depois os dados do usuário
+        element.innerHTML = '<div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading...</span></div><br/>';
+
+       
+        setTimeout(function () 
+        {  
+            element.innerHTML = `<a>Vaga reservada para ${userData.nomeCompleto}</a><br/>
+                                     <a>Placa do Veículo: ${userData.placaVeiculo}</a><br/>
+                                     <a>Tipo do Veículo: ${userData.tipoDoVeiculo}</a><br/>`;
+
+            // Cria um botão de cancelar
+            var cancelButton = document.createElement("button");
+            cancelButton.textContent = "Cancelar";
+            cancelButton.classList.add('btn', 'btn-danger');
+            cancelButton.onclick = function () {
+                cancelarReserva(element);
+            };
+
+            element.appendChild(cancelButton);
+        }, 900);
+       
+       
+    }; 
     
 
+    // Função para cancelar a reserva
+    function cancelarReserva(element) {
+        var confirmation = confirm('Você está prestes a cancelar sua reserva. \nDeseja continuar @Model.NomeCompleto?');
+        if (confirmation) {
+            location.reload(); // Recarrega a página
+        }
+    }
 </script>
 
-<div class= "text-center">
+<div class="text-center">
     <h1 class="display-4">Vagas disponíveis</h1>
     <p>Sistema de controle de estacionamento</p>
 </div>
 
-@* <img class="card-img-top" src="https://allos.co/wp-content/uploads/2021/07/Caxias-1.jpg" alt="Card image cap"> *@
 <div class="container-fluid">
-            
-            
     <div class="sm-3">
         <div class="border border-success p-5 m-2" onclick="clicar(this)">1</div>
         <div class="border border-success p-5 m-2" onclick="clicar(this)">2</div>
-        <div class="border border-success p-5 m-2">3</div>
-        <div class="border border-success p-5 m-2">4</div>
-        <div class="border border-success p-5 m-2">5</div>
+        <div class="border border-success p-5 m-2" onclick="clicar(this)">3</div>
+        <div class="border border-success p-5 m-2" onclick="clicar(this)">4</div>
+        <div class="border border-success p-5 m-2" onclick="clicar(this)">5</div>
     </div>
-            
-            
-            
 </div>
