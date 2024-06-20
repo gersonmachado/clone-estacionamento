@@ -5,6 +5,14 @@
     Layout = "_Layout";
 }
 
+<style>
+    .disabled-div {
+        pointer-events: none;
+        opacity: 0.5;
+        background-color: #e9ecef;
+    }
+</style>
+
 <script>
     // Função para pegar os dados do usuário
     function getUserData() {
@@ -19,6 +27,14 @@
     function clicar(element) 
     {
         var userData = getUserData();
+
+        // Desabilita outras divs
+        var vagas = document.querySelectorAll('.vaga');
+        vagas.forEach(function (vaga) {
+            if (vaga !== element) {
+                vaga.classList.add('disabled-div');
+            }
+        });
 
         // Mostra uma animação de carregamento e depois os dados do usuário
         element.innerHTML = '<div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading...</span></div><br/>';
@@ -61,10 +77,10 @@
 
 <div class="container-fluid">
     <div class="sm-3">
-        <div class="border border-success p-5 m-2" onclick="clicar(this)">1</div>
-        <div class="border border-success p-5 m-2" onclick="clicar(this)">2</div>
-        <div class="border border-success p-5 m-2" onclick="clicar(this)">3</div>
-        <div class="border border-success p-5 m-2" onclick="clicar(this)">4</div>
-        <div class="border border-success p-5 m-2" onclick="clicar(this)">5</div>
+        <div class="border border-success p-5 m-2 vaga" onclick="clicar(this)">1</div>
+        <div class="border border-success p-5 m-2 vaga" onclick="clicar(this)">2</div>
+        <div class="border border-success p-5 m-2 vaga" onclick="clicar(this)">3</div>
+        <div class="border border-success p-5 m-2 vaga" onclick="clicar(this)">4</div>
+        <div class="border border-success p-5 m-2 vaga" onclick="clicar(this)">5</div>
     </div>
 </div>
